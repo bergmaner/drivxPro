@@ -52,6 +52,10 @@ class _CarScreenState extends State<CarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("Car Details",),
+        ),
         body: Container(
             margin: const EdgeInsets.only(left: 20.0, right: 20.0),
             child:Form(

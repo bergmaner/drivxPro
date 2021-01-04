@@ -3,8 +3,7 @@ import 'package:drivxpro/components/Button.dart';
 import 'package:drivxpro/components/FormError.dart';
 import 'package:drivxpro/components/Icon.dart';
 import 'package:drivxpro/components/ProgressDialog.dart';
-import 'package:drivxpro/screens/carScreen.dart';
-//import 'package:drivxpropro/screens/forgotPasswordScreen.dart';
+import 'package:drivxpro/screens/forgotPasswordScreen.dart';
 import 'package:drivxpro/screens/mainScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -54,10 +53,10 @@ class _SignInFormState extends State<SignInForm> {
         })).user;
 
       if(user != null){
-        DatabaseReference userRef = FirebaseDatabase.instance.reference().child('users/${user.uid}');
+        DatabaseReference userRef = FirebaseDatabase.instance.reference().child('drivers/${user.uid}');
         userRef.once().then((DataSnapshot snapshot) => {
           if(snapshot.value != null){
-            Navigator.pushNamedAndRemoveUntil(context, CarScreen.routeName,(route) => false),
+            Navigator.pushNamedAndRemoveUntil(context, MainScreen.routeName,(route) => false),
           }
         });
       }
@@ -140,10 +139,10 @@ class _SignInFormState extends State<SignInForm> {
               Text("Remember me"),
               Spacer(),
               GestureDetector(
-               // onTap:
-                    //()=> Navigator.pushNamed(
-                    //context, ForgotPasswordScreen.routeName)
-               // ,
+               onTap:
+                    ()=> Navigator.pushNamed(
+                    context, ForgotPasswordScreen.routeName)
+               ,
                   child: Text("Forgot Password",
                   style: TextStyle(decoration: TextDecoration.underline),
                 ),
