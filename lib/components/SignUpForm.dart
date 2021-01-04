@@ -3,6 +3,7 @@ import 'package:drivxpro/components/Button.dart';
 import 'package:drivxpro/components/FormError.dart';
 import 'package:drivxpro/components/Icon.dart';
 import 'package:drivxpro/components/ProgressDialog.dart';
+import 'package:drivxpro/screens/carScreen.dart';
 import 'package:drivxpro/screens/mainScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -59,7 +60,8 @@ class _SignUpFormState extends State<SignUpForm> {
      "phoneNumber": phoneNumber
    };
    userRef.set(userMap);
-   Navigator.pushNamedAndRemoveUntil(context, MainScreen.routeName,(route) => false);
+   currentUser = user;
+   Navigator.pushNamedAndRemoveUntil(context, CarScreen.routeName,(route) => false);
  }}
 
   @override

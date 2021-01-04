@@ -3,6 +3,7 @@ import 'package:drivxpro/components/Button.dart';
 import 'package:drivxpro/components/FormError.dart';
 import 'package:drivxpro/components/Icon.dart';
 import 'package:drivxpro/components/ProgressDialog.dart';
+import 'package:drivxpro/screens/carScreen.dart';
 //import 'package:drivxpropro/screens/forgotPasswordScreen.dart';
 import 'package:drivxpro/screens/mainScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,7 +57,7 @@ class _SignInFormState extends State<SignInForm> {
         DatabaseReference userRef = FirebaseDatabase.instance.reference().child('users/${user.uid}');
         userRef.once().then((DataSnapshot snapshot) => {
           if(snapshot.value != null){
-            Navigator.pushNamedAndRemoveUntil(context, MainScreen.routeName,(route) => false),
+            Navigator.pushNamedAndRemoveUntil(context, CarScreen.routeName,(route) => false),
           }
         });
       }

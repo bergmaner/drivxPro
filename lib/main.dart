@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:drivxpro/routes.dart';
+import 'package:drivxpro/screens/carScreen.dart';
 import 'package:drivxpro/screens/mainScreen.dart';
 import 'package:drivxpro/screens/signInScreen.dart';
 import 'package:drivxpro/screens/signUpScreen.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: theme(),
-    initialRoute: SignUpScreen.routeName,
+    initialRoute: SignInScreen.routeName,
       routes: routes,
     );
   }
