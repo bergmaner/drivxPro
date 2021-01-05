@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:drivxpro/constants.dart';
 import 'package:drivxpro/routes.dart';
 import 'package:drivxpro/screens/carScreen.dart';
 import 'package:drivxpro/screens/mainScreen.dart';
 import 'package:drivxpro/screens/signInScreen.dart';
 import 'package:drivxpro/screens/signUpScreen.dart';
 import 'package:drivxpro/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +29,8 @@ Future<void> main() async {
       projectId: 'drivx-d9475',
     ),
   );
+  currentUser = FirebaseAuth.instance.currentUser;
+
   runApp(MyApp());
 }
 
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: theme(),
-    initialRoute: SignInScreen.routeName,
+    initialRoute: (currentUser != null ? MainScreen.routeName : MainScreen.routeName),
       routes: routes,
     );
   }
