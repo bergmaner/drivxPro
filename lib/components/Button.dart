@@ -16,7 +16,7 @@ class Button extends StatelessWidget {
         width: double.infinity,
         height: 56,
       child: FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         color: Color(0xfff00000),
         onPressed: press,
         child: Text(

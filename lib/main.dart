@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: theme(),
-    initialRoute: (currentUser != null ? MainScreen.routeName : MainScreen.routeName),
+    initialRoute: (currentUser != null ? MainScreen.routeName : SignUpScreen.routeName),
       routes: routes,
     );
   }
