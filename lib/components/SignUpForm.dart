@@ -181,7 +181,9 @@ class _SignUpFormState extends State<SignUpForm> {
               SizedBox(height: 20),
               FormError(errors: errors),
               SizedBox(height: 20),
-              Button(text:"Sign up",
+              SizedBox(
+              width: double.infinity,
+              child: Button(text:"Sign up",
                   press: () async{
                     var connectResult = Connectivity().checkConnectivity();
                     if(connectResult != ConnectivityResult.mobile && connectResult != ConnectivityResult.wifi) {
@@ -193,6 +195,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       registerUser();
                     }
                   })
+              ),
             ]
         )
     );

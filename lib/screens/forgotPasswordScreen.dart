@@ -104,7 +104,9 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
             SizedBox(height: 40),
             FormError(errors: errors),
             SizedBox(height: 15),
-            Button(
+        SizedBox(
+          width: double.infinity,
+            child:Button(
               text: "Continue",
               press: () {
                 if (_formKey.currentState.validate()) {
@@ -115,6 +117,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
                 }
               },
             ),
+        ),
             SizedBox(height:40),
             NoAccountText(),
           ],

@@ -42,10 +42,10 @@ flutter:
     - assets/icons/
 
   fonts:
-    - family: Brand-Bold
+    - family: Bolt-Semibold
       fonts:
         - asset: assets/fonts/bolt-semibold.ttf
-    - family: Brand-Regular
+    - family: Bolt-Regular
       fonts:
         - asset: assets/fonts/bolt-regular.ttf
   # For details regarding fonts from package dependencies,

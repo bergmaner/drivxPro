@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:drivxpro/components/Button.dart';
+import 'package:drivxpro/components/Confirmation.dart';
 import 'package:drivxpro/constants.dart';
 import 'package:firebase_database/firebase_database.dart';
 import "package:flutter/material.dart";
@@ -21,6 +22,11 @@ class _HomeTabState extends State<HomeTab> {
 
   var geolocator = Geolocator();
   var locationOptions = LocationOptions(accuracy: LocationAccuracy.bestForNavigation,distanceFilter: 4);
+
+  String title = "GO ONLINE";
+  Color color = Color(0xff29ab87);
+
+  bool isAvaible = false;
 
   void getCurrentPosition() async{
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
@@ -58,9 +64,37 @@ class _HomeTabState extends State<HomeTab> {
           child:
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 100),
-      child: Button(text:"Go Online",press: (){
-        goOnline();
-        getLocationUpdate();
+      child: Button(text: title, color: color, press: (){
+        showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) => Confirmation(
+              title: (!isAvaible) ? "GO ONLINE" : "GO OFFLINE",
+              subtitle: (!isAvaible) ? "You are about to become available to receive trip requests" : "you will stop receiving new trip request",
+              press: (){
+                if(!isAvaible){
+                   goOnline();
+                   getLocationUpdate();
+                   Navigator.pop(context);
+
+                   setState(() {
+                     color = Color(0xfff00000);
+                     title = "GO OFFLINE";
+                     isAvaible = true;
+                   });
+                }
+                else{
+                  goOffline();
+                  Navigator.pop(context);
+                  setState(() {
+                    color = Color(0xff29ab87);
+                    title = "GO ONLINE";
+                    isAvaible = false;
+                  });
+                }
+              },
+            ),
+            isDismissible: false
+        );
       },),
     )
           )
@@ -79,12 +113,22 @@ class _HomeTabState extends State<HomeTab> {
     });
   }
 
+  void goOffline (){
+    Geofire.removeLocation(currentUser.uid);
+    tripRef.onDisconnect();
+    tripRef.remove();
+    tripRef = null;
+  }
+
   void getLocationUpdate(){
     homeStreamPosition = geolocator.getPositionStream(locationOptions).listen((Position position) {
       currentPosition = position;
-      Geofire.setLocation(currentUser.uid, position.latitude, position.longitude);
+      if(isAvaible){
+        Geofire.setLocation(currentUser.uid, position.latitude, position.longitude);
+      }
       LatLng pos = LatLng(position.latitude, position.longitude);
       mapController.animateCamera(CameraUpdate.newLatLng(pos));
+
     });
   }
 }

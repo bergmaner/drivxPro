@@ -152,7 +152,9 @@ class _SignInFormState extends State<SignInForm> {
           SizedBox(height: 20),
           FormError(errors: errors),
           SizedBox(height: 20),
-          Button(text:"Sign in",
+          SizedBox(
+              width: double.infinity,
+              child: Button(text:"Sign in",
               press: () async {
                 var connectResult = Connectivity().checkConnectivity();
                 if(connectResult != ConnectivityResult.mobile && connectResult != ConnectivityResult.wifi) {
@@ -163,6 +165,7 @@ class _SignInFormState extends State<SignInForm> {
               login();
             }
           })
+          )
         ]
       )
     );
